@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rupesh | Software Developer Portfolio</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #14141f;
+  --surface-2: #1c1c2b;
+  --text: #e8e8f0;
+  --muted: #9a9ab0;
+  --accent: #7c5cff;
+  --accent-2: #4f9dff;
+  --border: #26263a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: inherit; text-decoration: none; }
+@keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.nav { position: sticky; top: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 18px 6vw; background: rgba(10,10,15,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.logo { font-weight: 800; font-size: 22px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.nav nav a { margin-left: 28px; color: var(--muted); font-weight: 500; transition: color 0.2s; }
+.nav nav a:hover { color: var(--text); }
+.hero { min-height: 90vh; display: flex; align-items: center; padding: 0 6vw; background: radial-gradient(circle at 70% 30%, rgba(124,92,255,0.18), transparent 50%); }
+.hero-content { max-width: 760px; }
+.hero h1 { font-size: clamp(48px, 9vw, 96px); font-weight: 800; line-height: 1; }
+.role { font-size: clamp(20px, 3vw, 30px); color: var(--accent); font-weight: 600; margin: 8px 0 20px; }
+.tagline { font-size: 18px; color: var(--muted); max-width: 600px; }
+.hero-btns { margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap; }
+.btn { padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; transition: transform 0.15s, box-shadow 0.2s; cursor: pointer; border: none; display: inline-block; }
+.btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; }
+.btn.primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(124,92,255,0.4); }
+.btn.ghost { border: 1px solid var(--border); color: var(--text); background: transparent; }
+.btn.ghost:hover { background: var(--surface); }
+.section { padding: 90px 6vw; max-width: 1200px; margin: 0 auto; }
+.eyebrow { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+.section h2 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; margin: 10px 0 16px; }
+.section-sub { color: var(--muted); max-width: 640px; margin-bottom: 40px; }
+.about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+.about-text p { color: var(--muted); margin-bottom: 16px; font-size: 17px; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; }
+.stat .num { display: block; font-size: 26px; font-weight: 800; color: var(--accent); }
+.stat .lbl { color: var(--muted); font-size: 14px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px; transition: transform 0.2s, border-color 0.2s; }
+.card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.card h3 { font-size: 19px; margin-bottom: 10px; }
+.card p { color: var(--muted); font-size: 15px; margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { background: var(--surface-2); color: var(--accent-2); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+.project { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 30px; transition: transform 0.2s, border-color 0.2s; }
+.project:hover { transform: translateY(-4px); border-color: var(--accent); }
+.project.featured { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(124,92,255,0.12), rgba(79,157,255,0.08)); border-color: var(--accent); }
+.project-meta { color: var(--muted); font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+.project-meta .new { background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 11px; }
+.project h3 { font-size: 22px; margin-bottom: 12px; }
+.project p { color: var(--muted); margin-bottom: 16px; }
+.project-links { margin-top: 18px; display: flex; gap: 18px; }
+.project-links a { color: var(--accent-2); font-weight: 700; font-size: 14px; cursor: pointer; }
+.project-links a:hover { color: var(--accent); }
+.contact-info { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; color: var(--muted); }
+.contact-info a:hover { color: var(--accent); }
+.contact-form { display: grid; gap: 16px; max-width: 560px; }
+.contact-form input, .contact-form textarea { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; color: var(--text); font-size: 15px; font-family: inherit; }
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
+.footer { text-align: center; padding: 40px; color: var(--muted); border-top: 1px solid var(--border); font-size: 14px; }
+@media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } .nav nav a { margin-left: 16px; font-size: 14px; } }
+
+/* ===== CALCULATOR MODAL ===== */
+.calc-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 24px; overflow: auto; }
+.calc-overlay.show { display: flex; animation: fade 0.3s; }
+#calc-app { position: relative; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a1a2e; }
+.calc-close { position: absolute; top: -16px; right: -16px; width: 40px; height: 40px; border-radius: 50%; border: none; background: #fff; color: #1a1a2e; font-size: 22px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 16px rgba(0,0,0,0.3); z-index: 2; }
+.calc-close:hover { background: #f0f0f5; }
+#calc-app .container { background: #fff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); width: 100%; max-width: 520px; overflow: hidden; }
+#calc-app .tabs { display: flex; background: #f0f0f5; }
+#calc-app .tab { flex: 1; padding: 18px; text-align: center; font-weight: 600; cursor: pointer; color: #888; transition: all 0.3s; border: none; background: none; font-size: 16px; }
+#calc-app .tab.active { background: #fff; color: #764ba2; box-shadow: 0 -3px 0 #764ba2 inset; }
+#calc-app .panel { padding: 32px; display: none; animation: fade 0.4s; }
+#calc-app .panel.active { display: block; }
+#calc-app h1 { font-size: 22px; margin-bottom: 6px; }
+#calc-app .sub { color: #999; font-size: 14px; margin-bottom: 24px; }
+#calc-app label { display: block; font-weight: 600; margin: 16px 0 8px; font-size: 14px; }
+#calc-app input, #calc-app select { width: 100%; padding: 14px; border: 2px solid #e0e0eb; border-radius: 12px; font-size: 16px; transition: border 0.2s; background: #fff; color: #1a1a2e; }
+#calc-app input:focus, #calc-app select:focus { outline: none; border-color: #764ba2; }
+#calc-app .row { display: flex; gap: 12px; }
+#calc-app .row > div { flex: 1; }
+#calc-app .gender { display: flex; gap: 12px; }
+#calc-app .gender button { flex: 1; padding: 14px; border: 2px solid #e0e0eb; border-radius: 12px; background: #fff; cursor: pointer; font-size: 15px; font-weight: 600; transition: all 0.2s; }
+#calc-app .gender button.active { border-color: #764ba2; background: #f3eefc; color: #764ba2; }
+#calc-app .btn { width: 100%; padding: 16px; margin-top: 24px; border: none; border-radius: 12px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; font-size: 17px; font-weight: 700; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; }
+#calc-app .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(118,75,162,0.4); }
+#calc-app .result { margin-top: 28px; text-align: center; display: none; }
+#calc-app .result.show { display: block; animation: fade 0.4s; }
+#calc-app .big { font-size: 48px; font-weight: 800; }
+#calc-app .badge { display: inline-block; padding: 6px 18px; border-radius: 20px; font-weight: 700; margin-top: 8px; color: #fff; }
+#calc-app .bar { height: 14px; border-radius: 7px; margin: 20px 0 8px; background: linear-gradient(to right, #3498db, #2ecc71, #f1c40f, #e67e22, #e74c3c); position: relative; }
+#calc-app .marker { position: absolute; top: -6px; width: 26px; height: 26px; background: #fff; border: 4px solid #1a1a2e; border-radius: 50%; transform: translateX(-50%); transition: left 0.6s ease; }
+#calc-app .scale { display: flex; justify-content: space-between; font-size: 11px; color: #999; }
+#calc-app .info { background: #f7f7fb; border-radius: 12px; padding: 16px; margin-top: 18px; text-align: left; font-size: 14px; line-height: 1.7; }
+#calc-app .cal-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 20px; }
+#calc-app .cal-card { background: #f7f7fb; border-radius: 14px; padding: 16px 8px; text-align: center; }
+#calc-app .cal-card .v { font-size: 22px; font-weight: 800; color: #764ba2; }
+#calc-app .cal-card .l { font-size: 12px; color: #888; margin-top: 4px; }
+#calc-app .tdee { font-size: 40px; font-weight: 800; color: #764ba2; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="logo">Rupesh</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Rupesh</h1>
+    <p class="role">Software Developer</p>
+    <p class="tagline">Passionate engineering student focused on developing practical systems combining electronics, embedded technology, and software — creating solutions that improve everyday life.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn primary">View Projects</a>
+      <a href="#contact" class="btn ghost">Get In Touch</a>
+    </div>
+  </div>
+</section>
+<section id="about" class="section">
+  <span class="eyebrow">About Me</span>
+  <h2>Building Digital Experiences That Matter</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I am an engineering student passionate about building innovative hardware and software systems. My interests lie in embedded systems, wearable technology, and game development.</p>
+      <p>I enjoy transforming ideas into practical devices and applications, combining sensors, microcontrollers, and programming to create real-world impact.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="num">4</span><span class="lbl">Major Projects</span></div>
+      <div class="stat"><span class="num">Software</span><span class="lbl">Focus Area</span></div>
+      <div class="stat"><span class="num">Engineering</span><span class="lbl">Background</span></div>
+      <div class="stat"><span class="num">∞</span><span class="lbl">Curiosity</span></div>
+    </div>
+  </div>
+</section>
+<section id="skills" class="section">
+  <span class="eyebrow">Skills</span>
+  <h2>Technologies &amp; Expertise</h2>
+  <p class="section-sub">A comprehensive toolkit for building modern digital experiences</p>
+  <div class="cards">
+    <div class="card"><h3>Embedded Systems</h3><p>Developing hardware-based solutions using sensors, microcontrollers, and wearable technology.</p><div class="tags"><span>Arduino</span><span>Sensors</span><span>Embedded C</span><span>IoT</span></div></div>
+    <div class="card"><h3>Hardware Prototyping</h3><p>Designing and building functional prototypes for real-world applications.</p><div class="tags"><span>Circuit Design</span><span>Wearables</span><span>Electronics</span></div></div>
+    <div class="card"><h3>Programming</h3><p>Writing efficient code for both hardware and software projects.</p><div class="tags"><span>C/C++</span><span>Python</span><span>OOP</span><span>JavaScript</span></div></div>
+    <div class="card"><h3>Problem Solving</h3><p>Practicing algorithms and logical thinking through coding challenges.</p><div class="tags"><span>DSA Basics</span><span>LeetCode</span></div></div>
+  </div>
+</section>
+<section id="projects" class="section">
+  <span class="eyebrow">Projects</span>
+  <h2>Featured Work</h2>
+  <p class="section-sub">A selection of projects that showcase my skills and passion for creating exceptional digital experiences</p>
+  <div class="projects">
+    <article class="project featured">
+      <div class="project-meta">Web App · Health Tech · <span class="new">Latest</span></div>
+      <h3>BMI &amp; Calorie Calculator</h3>
+      <p>A modern, interactive web app that calculates Body Mass Index and daily calorie needs using the Mifflin–St Jeor equation. Features a tabbed UI, animated results, and metric units — built with vanilla HTML, CSS, and JavaScript.</p>
+      <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Health</span></div>
+      <div class="project-links">
+        <a onclick="openCalc()">Open Calculator</a>
+        <a href="https://bmi-calorie-calculator-puce.vercel.app/" target="_blank" rel="noopener">Live Demo</a>
+      </div>
+    </article>
+    <article class="project"><div class="project-meta">Embedded · Wearable Tech</div><h3>Wearable Hand Glove with Gesture Control</h3><p>A smart glove capable of recognizing hand gestures and translating them into control signals for devices, enabling intuitive human–machine interaction.</p><div class="tags"><span>Sensors</span><span>Microcontroller</span><span>Embedded C</span></div><div class="project-links"><a href="#">Code</a><a href="#">Live Demo</a></div></article>
+    <article class="project"><div class="project-meta">Health Tech · Embedded</div><h3>Fitness &amp; Calorie Tracker</h3><p>A wearable fitness tracking system that monitors steps taken, estimates calories burned, and tracks physical activity to help users maintain a healthy lifestyle.</p><div class="tags"><span>Motion Sensors</span><span>Microcontroller</span><span>Embedded C</span><span>IoT</span></div><div class="project-links"><a href="#">Code</a><a href="#">Live Demo</a></div></article>
+    <article class="project"><div class="project-meta">Game Development · Software</div><h3>Arcade Fighting Game</h3><p>A 2D fighting game inspired by Tekken, featuring player controls, character movements, attack mechanics, collision detection, and score tracking.</p><div class="tags"><span>C++</span><span>OOP</span><span>Game Logic</span></div><div class="project-links"><a href="#">Code</a><a href="#">Live Demo</a></div></article>
+  </div>
+</section>
+<section id="contact" class="section">
+  <span class="eyebrow">Contact</span>
+  <h2>Let's Work Together</h2>
+  <p class="section-sub">Have a project in mind or just want to chat? I'm always open to discussing new opportunities and creative ideas.</p>
+  <div class="contact-info">
+    <a href="mailto:rupeshjr681@gmail.com">rupeshjr681@gmail.com</a>
+    <span>987654321</span>
+    <span>India</span>
+  </div>
+  <form class="contact-form" onsubmit="handleSubmit(event)">
+    <input type="text" placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <input type="text" placeholder="Subject">
+    <textarea placeholder="Message" rows="4" required></textarea>
+    <button type="submit" class="btn primary">Send Message</button>
+  </form>
+</section>
+<footer class="footer"><p>&copy; 2026 Rupesh. Built with HTML, CSS &amp; JavaScript.</p></footer>
+
+<!-- CALCULATOR MODAL -->
+<div class="calc-overlay" id="calcOverlay">
+  <div id="calc-app">
+    <button class="calc-close" onclick="closeCalc()">&times;</button>
+    <div class="container">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('bmi')">BMI Calculator</button>
+        <button class="tab" onclick="switchTab('cal')">Calorie Calculator</button>
+      </div>
+      <div class="panel active" id="bmi">
+        <h1>Body Mass Index</h1>
+        <div class="sub">Metric units (cm / kg)</div>
+        <div class="row">
+          <div><label>Height (cm)</label><input type="number" id="bHeight" value="180"></div>
+          <div><label>Weight (kg)</label><input type="number" id="bWeight" value="65"></div>
+        </div>
+        <button class="btn" onclick="calcBMI()">Calculate BMI</button>
+        <div class="result" id="bmiResult">
+          <div class="big" id="bmiValue">--</div>
+          <div class="badge" id="bmiBadge">--</div>
+          <div class="bar"><div class="marker" id="bmiMarker" style="left:50%"></div></div>
+          <div class="scale"><span>15</span><span>18.5</span><span>25</span><span>30</span><span>40</span></div>
+          <div class="info" id="bmiInfo"></div>
+        </div>
+      </div>
+      <div class="panel" id="cal">
+        <h1>Daily Calorie Needs</h1>
+        <div class="sub">Mifflin–St Jeor equation · Metric</div>
+        <label>Gender</label>
+        <div class="gender">
+          <button id="male" class="active" onclick="setGender('male')">Male</button>
+          <button id="female" onclick="setGender('female')">Female</button>
+        </div>
+        <div class="row">
+          <div><label>Age</label><input type="number" id="cAge" value="25"></div>
+          <div><label>Height (cm)</label><input type="number" id="cHeight" value="180"></div>
+          <div><label>Weight (kg)</label><input type="number" id="cWeight" value="65"></div>
+        </div>
+        <label>Activity Level</label>
+        <select id="cActivity">
+          <option value="1.2">Sedentary (little or no exercise)</option>
+          <option value="1.375">Light (exercise 1–3 days/week)</option>
+          <option value="1.55" selected>Moderate (exercise 3–5 days/week)</option>
+          <option value="1.725">Active (exercise 6–7 days/week)</option>
+          <option value="1.9">Very active (hard exercise / physical job)</option>
+        </select>
+        <button class="btn" onclick="calcCal()">Calculate Calories</button>
+        <div class="result" id="calResult">
+          <div class="sub" style="margin:0">Maintenance (TDEE)</div>
+          <div class="tdee" id="tdeeValue">--</div>
+          <div class="sub" style="margin-top:4px">calories / day</div>
+          <div class="cal-grid">
+            <div class="cal-card"><div class="v" id="loseVal">--</div><div class="l">Lose weight<br>(-0.5 kg/wk)</div></div>
+            <div class="cal-card"><div class="v" id="maintainVal">--</div><div class="l">Maintain</div></div>
+            <div class="cal-card"><div class="v" id="gainVal">--</div><div class="l">Gain weight<br>(+0.5 kg/wk)</div></div>
+          </div>
+          <div class="info" id="calInfo"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ----- Portfolio nav highlight + form -----
+  const links = document.querySelectorAll('.nav nav a');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 120) current = sec.id; });
+    links.forEach(l => { l.style.color = l.getAttribute('href') === '#' + current ? 'var(--text)' : ''; });
+  });
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert('Thanks for reaching out! Your message has been noted. (Connect a form service like Formspree to receive emails.)');
+    e.target.reset();
+  }
+  // ----- Calculator modal -----
+  const overlay = document.getElementById('calcOverlay');
+  function openCalc() { overlay.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function closeCalc() { overlay.classList.remove('show'); document.body.style.overflow = ''; }
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeCalc(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCalc(); });
+  // ----- Calculator logic -----
+  let gender = 'male';
+  function switchTab(id) {
+    document.querySelectorAll('#calc-app .tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('#calc-app .panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+  function setGender(g) {
+    gender = g;
+    document.getElementById('male').classList.toggle('active', g === 'male');
+    document.getElementById('female').classList.toggle('active', g === 'female');
+  }
+  function calcBMI() {
+    const h = parseFloat(document.getElementById('bHeight').value) / 100;
+    const w = parseFloat(document.getElementById('bWeight').value);
+    if (!h || !w || h <= 0 || w <= 0) { alert('Please enter valid height and weight.'); return; }
+    const bmi = w / (h * h);
+    let cat, color;
+    if (bmi < 18.5) { cat = 'Underweight'; color = '#3498db'; }
+    else if (bmi < 25) { cat = 'Normal'; color = '#2ecc71'; }
+    else if (bmi < 30) { cat = 'Overweight'; color = '#f1c40f'; }
+    else if (bmi < 35) { cat = 'Obese (Class I)'; color = '#e67e22'; }
+    else { cat = 'Obese (Class II+)'; color = '#e74c3c'; }
+    document.getElementById('bmiValue').textContent = bmi.toFixed(1);
+    const badge = document.getElementById('bmiBadge');
+    badge.textContent = cat; badge.style.background = color;
+    let pct = ((bmi - 15) / (40 - 15)) * 100;
+    pct = Math.max(0, Math.min(100, pct));
+    document.getElementById('bmiMarker').style.left = pct + '%';
+    const minW = (18.5 * h * h).toFixed(1);
+    const maxW = (24.9 * h * h).toFixed(1);
+    document.getElementById('bmiInfo').innerHTML = '<b>Healthy BMI range:</b> 18.5 – 24.9 kg/m²<br><b>Healthy weight for your height:</b> ' + minW + ' – ' + maxW + ' kg';
+    document.getElementById('bmiResult').classList.add('show');
+  }
+  function calcCal() {
+    const age = parseFloat(document.getElementById('cAge').value);
+    const h = parseFloat(document.getElementById('cHeight').value);
+    const w = parseFloat(document.getElementById('cWeight').value);
+    const act = parseFloat(document.getElementById('cActivity').value);
+    if (!age || !h || !w) { alert('Please fill in all fields.'); return; }
+    let bmr = 10 * w + 6.25 * h - 5 * age + (gender === 'male' ? 5 : -161);
+    const tdee = bmr * act;
+    document.getElementById('tdeeValue').textContent = Math.round(tdee);
+    document.getElementById('loseVal').textContent = Math.round(tdee - 500);
+    document.getElementById('maintainVal').textContent = Math.round(tdee);
+    document.getElementById('gainVal').textContent = Math.round(tdee + 500);
+    document.getElementById('calInfo').innerHTML = '<b>BMR (at rest):</b> ' + Math.round(bmr) + ' cal/day<br><b>TDEE (with activity):</b> ' + Math.round(tdee) + ' cal/day<br>A deficit/surplus of ~500 cal/day ≈ 0.5 kg change per week.';
+    document.getElementById('calResult').classList.add('show');
+  }
+</script>
+</body>
+</html>
